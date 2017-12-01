@@ -33,6 +33,7 @@ class TaskProcessor
             {
                 $this->onTaskFound($task);
             }
+            sleep(1);
         }
     }
 
