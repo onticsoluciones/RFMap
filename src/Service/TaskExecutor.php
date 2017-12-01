@@ -90,7 +90,7 @@ class TaskExecutor
         $this->taskRepository->remove($task);
         
         // If the task is a recurring one, reinsert it into the
-        // queue to be execute after the specified interval
+        // queue to be executed after the specified interval
         if($task->rescheduleAfter)
         {
             $task = $task->getRescheduledTask();
