@@ -11,12 +11,11 @@
 * [Installation](https://github.com/onticsoluciones/RFMap#installation)
 * [Usage](https://github.com/onticsoluciones/RFMap#usage)
 * [License](https://github.com/onticsoluciones/RFMap/blob/master/LICENSE)
-* [Credits](https://github.com/onticsoluciones/RFMap#credits)
 
 #Description
 
-RFMap is a tool for detection and monitoring of networks and wireless devices such Wifi, Bluetooth, IoT devices, GSM and other RF devices. 
-It uses a combination of software and low-cost hardware (SDR) which allows to make scans in diverse frequencies and to show it in a GUI to analyze the collected data.
+RFMap is a tool for detection and monitoring of networks and wireless devices such Wifi, Bluetooth, IoT devices, GSM and other RF devices.
+It uses a combination of software and low-cost hardware (SDR) which allows to make scans in diverse frequencies and to show it in a GUI to analyze the collected data and find malicious devices, avoid data filtering without consent, find vulnerabilities of discovered devices and hardware inventory. 
 
 #Technology used
 
@@ -25,16 +24,18 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
 - [x] RTL-SDR
 - [x] Python
 - [x] SQLite
+- [x] Phinx
 
 #Features
 
- - Detection of networks and devices 
- - Inventory 
- - Monitoring / Time conditions
- - Identification of protocols and services     
- - New devices notification/ Alerts      
- - Optimization of spectrum use     
- - Deployment planning
+ - Detection of malicious devices (e.g. WiFi Pineapple, hidden webcams). 
+ - Vulnerability detection.
+ - Avoid data filtration.
+ - Detection of networks and devices.
+ - Inventory and monitoring.
+ - Identification of protocols and services.     
+ - New devices notification/ Alerts.      
+ - Optimization of spectrum use.     
 
 #Installation
 
@@ -73,10 +74,6 @@ vendor/bin/phinx migrate
 
 #Usage
 
-#Credits
-
-- Python -> https://www.python.org/
-- PHP -> https://php.net/images/logo.php
 
 #Contributors
 
