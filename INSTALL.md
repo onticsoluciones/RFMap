@@ -15,6 +15,18 @@ Install the dependencies:
 php composer.phar install
 ```
 
+Copy phinx.yml.dist to phinx.yml:
+
+```bash
+cp phinx.yml.dist phinx.yml
+```
+
+You can edit the database path if desired, by default it will be created in:
+
+```
+./data/rfmap.sqlite
+```
+
 Run the schema migration tool to create the database:
 
 ```bash
