@@ -28,6 +28,28 @@ class PluginRepository extends Repository
             }
         }
     }
+
+    /**
+     * Checks whether a plugin is enabled
+     * @param $name
+     * @return bool
+     */
+    public function isEnabled($name)
+    {
+        $sql = 'SELECT enabled FROM plugins WHERE name = :name';
+        $command = $this->connection->prepare($name);
+        $command->execute();
+        
+        if($row = $command->fetch())
+        {
+            return $row['enabled'];
+        }
+        else
+        {
+            // Plugin apparently no longer exists
+            return false;
+        }
+    }
     
     /**
      * Insert a plugin into the database
