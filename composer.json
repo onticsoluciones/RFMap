@@ -1,5 +1,10 @@
 {
-    "require": {
-        "robmorgan/phinx": "0.9.*"
+  "require": {
+    "robmorgan/phinx": "0.9.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ontic\\RFMap\\": "src/"
     }
+  }
 }
