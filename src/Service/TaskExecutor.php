@@ -44,12 +44,14 @@ class TaskExecutor
         if(!$this->pluginRepository->isEnabled($task->plugin))
         {
             // Plugin is no longer enabled, bail out
+            $this->completeTask($task);
             return;
         }
         
         if(!file_exists($executablePath) || !is_executable($executablePath))
         {
             // Plugin directory has been tampered after startup, do nothing
+            $this->completeTask($task);
             return;
         }
         
@@ -66,21 +68,28 @@ class TaskExecutor
         if($retval !== 0)
         {
             // Command execution failed
+            $this->completeTask($task);
             return;
         }
         
         // Try to parse the output as a JSON object
         $output = implode(PHP_EOL, $output);
-        if(($data = json_decode($output)) === null)
+        if(($data = json_decode($output, true)) === null)
         {
             // Output not in the expected format, leave
+            $this->completeTask($task);
             return;
         }
         
-        $this->connection->beginTransaction();
-        
         // Convert the json output to a datapoint
         $dataPoint = static::jsonToDataPoint($task->plugin, $data);
+        $this->completeTask($task, $dataPoint);
+    }
+    
+    private function completeTask(Task $task, DataPoint $dataPoint = null)
+    {
+        $this->connection->beginTransaction();
+        
         if($dataPoint)
         {
             $this->dataPointRepository->add($dataPoint);
@@ -88,7 +97,7 @@ class TaskExecutor
         
         // Remove the task from the queue
         $this->taskRepository->remove($task);
-        
+
         // If the task is a recurring one, reinsert it into the
         // queue to be executed after the specified interval
         if($task->rescheduleAfter)
@@ -96,7 +105,7 @@ class TaskExecutor
             $task = $task->getRescheduledTask();
             $this->taskRepository->add($task);
         }
-        
+
         $this->connection->commit();
     }
 

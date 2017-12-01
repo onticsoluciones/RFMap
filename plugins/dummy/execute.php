@@ -3,9 +3,9 @@
 echo json_encode([
         'entity_id' => '1',
         'name' => 'Entity 1',
-        'frequency' => 99.99,
-        'bandwidth' => 15.5,
-        'rssi' => 3.45,
+        'frequency' => rand(0, 9999) / 100,
+        'bandwidth' => rand(0, 9999) / 100,
+        'rssi' => rand(0, 9999) / 100,
         'extra' => [
             'key1' => 'value1',
             'key2' => 'value2'

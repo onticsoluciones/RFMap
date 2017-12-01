@@ -11,7 +11,7 @@ class TaskRepository extends Repository
      */
     public function findFirst()
     {
-        $sql = 'SELECT * FROM tasks ORDER BY run_at DESC LIMIT 1;';
+        $sql = 'SELECT * FROM tasks WHERE strftime(\'%s\', \'now\') >= run_at ORDER BY run_at DESC LIMIT 1;';
         $command = $this->connection->prepare($sql);
         $command->execute();
         
@@ -32,13 +32,13 @@ class TaskRepository extends Repository
     public function add(Task $task)
     {
         $sql = '
-          INSERT INTO taks(plugin, run_at, reschedule_after)
+          INSERT INTO tasks(plugin, run_at, reschedule_after)
           VALUES(:plugin, :run_at, :reschedule_after);';
         
         $command = $this->connection->prepare($sql);
         $command->execute([
             'plugin' => $task->plugin,
-            'run_at' => $task->runAt->format('c'),
+            'run_at' => $task->runAt->format('U'),
             'reschedule_after' => $task->rescheduleAfter
         ]);
     }
@@ -63,9 +63,11 @@ class TaskRepository extends Repository
         $task = new Task();
         $task->id = $row['id'];
         $task->plugin = $row['plugin'];
-        $task->runAt = \DateTime::createFromFormat('c', $row['run_at']);
         $task->rescheduleAfter = $row['reschedule_after'];
         $task->entityId = $row['entity_id'];
+        
+        $task->runAt = \DateTime::createFromFormat('U', $row['run_at']);
+        $task->runAt->setTimezone(new \DateTimeZone('UTC'));
         
         return $task;
     }

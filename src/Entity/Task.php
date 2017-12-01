@@ -25,8 +25,9 @@ class Task
         $newTask->rescheduleAfter = $this->rescheduleAfter;
         $newTask->entityId = $this->entityId;
         
-        $interval = sprintf('P%sS', $this->rescheduleAfter);
-        $newTask->runAt = $this->runAt->add(new \DateInterval($interval));
+        $interval = sprintf('PT%sS', $this->rescheduleAfter);
+        $now = (new \DateTime())->setTimezone(new \DateTimeZone('UTC'));
+        $newTask->runAt = $now->add(new \DateInterval($interval));
         return $newTask;
     }
 }

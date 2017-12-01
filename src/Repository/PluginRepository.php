@@ -31,14 +31,14 @@ class PluginRepository extends Repository
 
     /**
      * Checks whether a plugin is enabled
-     * @param $name
+     * @param string $name
      * @return bool
      */
     public function isEnabled($name)
     {
         $sql = 'SELECT enabled FROM plugins WHERE name = :name';
-        $command = $this->connection->prepare($name);
-        $command->execute();
+        $command = $this->connection->prepare($sql);
+        $command->execute([ 'name' => $name ]);
         
         if($row = $command->fetch())
         {

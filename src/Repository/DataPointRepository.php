@@ -24,7 +24,7 @@ class DataPointRepository extends Repository
             'frequency' => $dataPoint->frequency,
             'bandwidth' => $dataPoint->bandwidth,
             'rssi' => $dataPoint->rssi,
-            'extra' => $dataPoint->extra
+            'extra' => json_encode($dataPoint->extra)
         ]);
     }
 }
