@@ -1,4 +1,4 @@
 /vendor/
-/phinx.yml/.idea/
+/.idea/
 /phinx.yml
 /data/rfmap.sqlite
