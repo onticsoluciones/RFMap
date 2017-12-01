@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Ontic\\RFMap\\Webservices\\": "src/"
+    }
+  },
+  "require": {
+    "symfony/http-foundation": "3.*",
+    "symfony/routing": "3.*"
+  }
+}
