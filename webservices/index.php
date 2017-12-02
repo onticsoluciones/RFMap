@@ -21,6 +21,7 @@ $request = Request::createFromGlobals();
 $builder = new RouteCollectionBuilder();
 $builder->addRoute('datapoints', '/datapoint', 'DataPoint');
 $builder->addRoute('plugins', '/plugin', 'Plugin');
+$builder->addRoute('tasks', '/task', 'ListScheduledTasks');
 $routes = $builder->getRoutes();
 
 // Match current request
