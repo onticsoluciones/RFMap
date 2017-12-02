@@ -1,0 +1,35 @@
+import subprocess
+import sys
+import os
+import signal
+import time
+import re
+from parse import *
+
+with open("/tmp/blescan", "w+") as f:
+    btmon_devices=subprocess.Popen(['btmon'], stdout=f) #, shell=True, stdout=subprocess.PIPE,preexec_fn=os.setsid)
+    macs=subprocess.Popen(['/usr/bin/hcitool', 'lescan'], shell=False, stdout=subprocess.PIPE, stderr=None)
+    time.sleep(20)
+    macs.kill()
+    btmon_devices.kill()
+    f.close()
+
+#with open("blescan", "r+") as f:
+#    devices=f.read()
+#    partes1 = re.split("HCI Event",devices)
+#    #partes2 = re.match(r'Address: ([0-9A-F]{2}(?::[0-9A-F]{2}){5})[\s]*RSSI: (.*) dBm',partes1,re.MULTILINE)
+#    partes2 = re.match(r'Address: ([0-9A-F]{2}(?::[0-9A-F]{2}){5})',partes1,re.MULTILINE)
+#    print partes2
+#    #strings = devices.rstrip('\n')
+#    #print strings
+#    #partes1 = re.findall(r'Address: (.*)\s*RSSI: (.*) dBm',strings,re.MULTILINE)
+
+
+
+
+
+
+#HCI Event:([\s\S]*)[\s\S]*>
+#[\s\S]*Address: ([0-9A-F]{2}(?::[0-9A-F]{2}){5})[\s\S]*Name \(complete\): (.*)[\s\S]*RSSI: (-\d*) dBm
+
+#    f.close()
