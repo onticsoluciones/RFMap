@@ -14,7 +14,7 @@ foreach($output as $line)
         $data[] = [
             'name' => trim($matches[1]),
             'entity_id' => trim($matches[2]),
-            'frequency' => $matches[4] * 1000,
+            'frequency' => $matches[4],
             'bandwidth' => 20,
             'rssi' => ($matches[6] / 2) - 100,
             'extra' => [
