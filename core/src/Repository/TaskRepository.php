@@ -11,7 +11,13 @@ class TaskRepository extends Repository
      */
     public function findFirst()
     {
-        $sql = 'SELECT * FROM tasks WHERE strftime(\'%s\', \'now\') >= run_at ORDER BY run_at DESC LIMIT 1;';
+        $sql = '
+          SELECT * 
+          FROM tasks 
+          INNER JOIN plugins ON tasks.plugin = plugins.name
+          WHERE strftime(\'%s\', \'now\') >= run_at AND plugins.enabled = 1
+          ORDER BY run_at DESC 
+          LIMIT 1;';
         $command = $this->connection->prepare($sql);
         $command->execute();
         
