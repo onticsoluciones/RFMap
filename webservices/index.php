@@ -41,6 +41,9 @@ try
     // Execute it and fetch the response
     $response = $controller->indexAction();
     
+    // Add CORS header
+    $response->headers->add(['Access-Control-Allow-Origin' => '*']);
+    
     // Send the response and exit
     $response->send();
 }
