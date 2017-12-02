@@ -9,6 +9,7 @@
 * [Technology](https://github.com/onticsoluciones/RFMap#technology-used)
 * [Features](https://github.com/onticsoluciones/RFMap#features)
 * [Installation](https://github.com/onticsoluciones/RFMap#installation)
+* [Plugins](https://github.com/onticsoluciones/RFMap#plugins)
 * [Usage](https://github.com/onticsoluciones/RFMap#usage)
 * [License](https://github.com/onticsoluciones/RFMap/blob/master/LICENSE)
 
@@ -71,6 +72,29 @@ Run the schema migration tool to create the database:
 ```bash
 vendor/bin/phinx migrate
 ```
+
+# Plugins
+
+## pmr_scan
+
+PMR 446 MHz power channel analyzer: scans the 8 PMR channels and returns its power (DBi).
+
+### Prerequisites
+
+In order to prepare your environment to build from the sources you have to first install a couple of development libraries.
+This step is needed only the first time.
+
+    sudo apt-get install libfftw3-dev libtclap-dev librtlsdr-dev
+
+### Installation
+
+    git clone https://github.com/AD-Vega/rtl-power-fftw.git
+    cd rtl-power-fftw
+    mkdir build
+    cd build
+    cmake ..
+    make
+    make install
 
 # Usage
 
