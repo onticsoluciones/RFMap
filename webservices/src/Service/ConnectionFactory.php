@@ -10,6 +10,8 @@ class ConnectionFactory
      */
     public function open($databaseFile)
     {
-        return new \PDO('sqlite:' . $databaseFile);
+        $connection = new \PDO('sqlite:' . $databaseFile);
+        $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        return $connection;
     }
 }
