@@ -8,6 +8,7 @@ use Ontic\RFMap\Service\PluginScanner;
 use Ontic\RFMap\Service\TaskProcessor;
 
 $connection = new PDO('sqlite:../data/rfmap.sqlite');
+$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
 // Refresh plugin list on start-up
 $pluginDir = __DIR__ . '/plugins';
