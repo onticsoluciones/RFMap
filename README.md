@@ -1,10 +1,10 @@
 
-#RFMap - Radio Frequency Mapper
+# RFMap - Radio Frequency Mapper
 
 ----------
 
 
-#Table of Contents
+# Table of Contents
 * [Description](https://github.com/onticsoluciones/RFMap#description)
 * [Technology](https://github.com/onticsoluciones/RFMap#technology-used)
 * [Features](https://github.com/onticsoluciones/RFMap#features)
@@ -12,12 +12,12 @@
 * [Usage](https://github.com/onticsoluciones/RFMap#usage)
 * [License](https://github.com/onticsoluciones/RFMap/blob/master/LICENSE)
 
-#Description
+# Description
 
 RFMap is a tool for detection and monitoring of networks and wireless devices such Wifi, Bluetooth, IoT devices, GSM and other RF devices.
-It uses a combination of software and low-cost hardware (SDR) which allows to make scans in diverse frequencies and to show it in a GUI to analyze the collected data and find malicious devices, avoid data filtering without consent, find vulnerabilities of discovered devices and hardware inventory. 
+It uses a combination of software and low-cost hardware (SDR) which allows to make scans in diverse frequencies and to show it in a GUI to analyze the collected data and find malicious devices, avoid data leaking without consent, find vulnerabilities of discovered devices and hardware inventory. 
 
-#Technology used
+# Technology used
 
 - [x] PHP
 - [x] GnuRadio
@@ -26,9 +26,9 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
 - [x] SQLite
 - [x] Phinx
 
-#Features
+# Features
 
- - Detection of malicious devices (e.g. WiFi Pineapple, hidden webcams). 
+ - Detection of malicious devices (e.g. WiFi Pineapple, hidden webcams, spy microphones). 
  - Vulnerability detection.
  - Avoid data filtration.
  - Detection of networks and devices.
@@ -37,7 +37,7 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
  - New devices notification/ Alerts.      
  - Optimization of spectrum use.     
 
-#Installation
+# Installation
 
 After cloning the repository, download Composer:
 
@@ -72,10 +72,10 @@ Run the schema migration tool to create the database:
 vendor/bin/phinx migrate
 ```
 
-#Usage
+# Usage
 
 
-#Contributors
+# Contributors
 
 * [Alfonso Moratalla](https://github.com/alfonsomoratalla) -> [Twitter](https://twitter.com/alfonso_ng)
 * [Alejandro Sánchez](https://github.com/alsanchez) -> [Twitter](https://twitter.com/alsanchez_)
