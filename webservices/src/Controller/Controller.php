@@ -12,6 +12,8 @@ abstract class Controller
     protected $request;
     /** @var Configuration */
     protected $configuration;
+    /** @var array */
+    protected $parameters;
 
     /**
      * @param Request $request
@@ -27,6 +29,14 @@ abstract class Controller
     public function setConfiguration(Configuration $configuration)
     {
         $this->configuration = $configuration;
+    }
+
+    /**
+     * @param array $parameters
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
     }
 
     /**
