@@ -46,7 +46,7 @@ def parseDevice(data):
     device['extra'] = []
     for line in data.splitlines():
         if "Address:" in line:
-            device['entityid'] = line.strip().split()[1]
+            device['entity_id'] = line.strip().split()[1]
         if "Name (complete):" in line:
             device['name'] = line.strip().split(":")[1].strip()
         if "RSSI:" in line:
