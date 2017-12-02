@@ -2,6 +2,8 @@
 
 namespace Ontic\RFMap\Service;
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use Ontic\RFMap\Entity\DataPoint;
 use Ontic\RFMap\Entity\Task;
 use Ontic\RFMap\Repository\DataPointRepository;
@@ -9,7 +11,9 @@ use Ontic\RFMap\Repository\PluginRepository;
 use Ontic\RFMap\Repository\TaskRepository;
 
 class TaskExecutor
-{
+{  
+    /** @var Logger */
+    private $logger;
     /** @var string */
     private $pluginDir;
     /** @var \PDO */
@@ -32,6 +36,8 @@ class TaskExecutor
         $this->pluginRepository = new PluginRepository($connection);
         $this->taskRepository = new TaskRepository($connection);
         $this->dataPointRepository = new DataPointRepository($connection);
+        $this->logger = new Logger(TaskExecutor::class);
+        $this->logger->pushHandler(new StreamHandler("php://stdout"));
     }
 
     /**
@@ -63,20 +69,24 @@ class TaskExecutor
         }
         
         // Run it and wait for its response...
+        $this->logger->debug(sprintf('Executing command "%s"', $command));
         exec($command, $output, $retval);
+        $output = implode(PHP_EOL, $output);
+        $this->logger->debug($output);
         
         if($retval !== 0)
         {
             // Command execution failed
+            $this->logger->err(sprintf('Command execution failed with code %d', $retval));
             $this->completeTask($task);
             return;
         }
         
         // Try to parse the output as a JSON object
-        $output = implode(PHP_EOL, $output);
         if(($data = json_decode($output, true)) === null)
         {
             // Output not in the expected format, leave
+            $this->logger->err('Command output is not a valid JSON object');
             $this->completeTask($task);
             return;
         }

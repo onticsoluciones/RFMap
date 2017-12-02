@@ -3,5 +3,8 @@
     "psr-4": {
       "Ontic\\RFMap\\": "src/"
     }
+  },
+  "require": {
+    "monolog/monolog": "~1.23"
   }
 }
