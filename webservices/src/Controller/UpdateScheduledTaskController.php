@@ -50,6 +50,21 @@ class UpdateScheduledTaskController extends Controller
             'reschedule_after' => $interval,
             'plugin' => $pluginName
         ]);
+        
+        if($statement->rowCount() == 0)
+        {
+            // Make it an insert instead
+            $sql = '
+              INSERT INTO tasks(plugin, run_at, reschedule_after)
+              VALUES(:plugin, :run_at, :reschedule_after)';
+            
+            $statement = $connection->prepare($sql);
+            $statement->execute([
+                'plugin' => $pluginName,
+                'run_at' => time(),
+                'reschedule_after' => $interval
+            ]);
+        }
     }
     
     private function removeSchedule($pluginName)
