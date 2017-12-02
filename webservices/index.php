@@ -20,6 +20,7 @@ $request = Request::createFromGlobals();
 // Define routes
 $builder = new RouteCollectionBuilder();
 $builder->addRoute('datapoints', '/datapoint', 'DataPoint');
+$builder->addRoute('plugins', '/plugin', 'Plugin');
 $routes = $builder->getRoutes();
 
 // Match current request
