@@ -6,6 +6,7 @@
   },
   "require": {
     "symfony/http-foundation": "3.*",
-    "symfony/routing": "3.*"
+    "symfony/routing": "3.*",
+    "symfony/yaml": "3.*"
   }
 }

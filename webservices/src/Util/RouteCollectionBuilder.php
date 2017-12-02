@@ -23,7 +23,7 @@ class RouteCollectionBuilder
     public function addRoute($name, $path, $controllerName)
     {
         $controllerClass = sprintf(
-            'Ontic\\RFMap\\Webservices\\Controller\\%sController.php',
+            'Ontic\\RFMap\\Webservices\\Controller\\%sController',
             $controllerName);
         
         $route = new Route($path, ['_controller' => $controllerClass ]);
