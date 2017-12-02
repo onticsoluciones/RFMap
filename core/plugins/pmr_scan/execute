@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./pmr_scan.php 2>/dev/null
