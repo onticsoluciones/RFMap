@@ -12,6 +12,15 @@ class UpdatePluginStateController extends Controller
      */
     public function indexAction()
     {
+        // Handle preflight
+        if($this->request->getMethod() === 'OPTIONS')
+        {
+            return new Response('', 200, [
+                'Access-Control-Allow-Methods' => 'PUT',
+                'Access-Control-Allow-Headers' => 'Content-Type'
+            ]);
+        }
+        
         // Read plugin name
         $pluginName = $this->parameters['name'];
         

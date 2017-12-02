@@ -19,16 +19,16 @@ class RouteCollectionBuilder
      * @param string $name
      * @param string $path
      * @param string $controllerName
-     * @param string $method
+     * @param string[] $methods
      */
-    public function addRoute($name, $path, $controllerName, $method = 'GET')
+    public function addRoute($name, $path, $controllerName, $methods = ['GET'])
     {
         $controllerClass = sprintf(
             'Ontic\\RFMap\\Webservices\\Controller\\%sController',
             $controllerName);
         
         $route = new Route($path, ['_controller' => $controllerClass ]);
-        $route->setMethods([$method]);
+        $route->setMethods($methods);
         $this->routes->add($name, $route);
     }
 

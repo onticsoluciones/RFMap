@@ -22,7 +22,7 @@ $builder = new RouteCollectionBuilder();
 $builder->addRoute('datapoints', '/datapoint', 'DataPoint');
 $builder->addRoute('plugins', '/plugin', 'Plugin');
 $builder->addRoute('tasks', '/task', 'ListScheduledTasks');
-$builder->addRoute('updatePluginState', '/plugin/{name}/state', 'UpdatePluginState', 'PUT');
+$builder->addRoute('updatePluginState', '/plugin/{name}/state', 'UpdatePluginState', ['PUT', 'OPTIONS']);
 $routes = $builder->getRoutes();
 
 // Match current request
