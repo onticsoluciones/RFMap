@@ -58,7 +58,7 @@
 	$pmr_json[] = array(
 	    'entity_id' => $i,
 	    'name' => 'PMR '.$i,
-	    'frequency' => $channels[1]/1000,
+	    'frequency' => $channels[1]/1000000,
 	    'bandwidth' => 0.0125,
 	    'rssi' => $pmr[$i],
 	    'extra' => []
