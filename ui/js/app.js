@@ -44,10 +44,10 @@
             {
                 updatePluginState(plugin.name, this.checked);
             });
-            if(plugin.rescheduleAfter !== null)
+            node.find(".plugin-interval").prop("value", plugin.rescheduleAfter).change(function()
             {
-                node.find(".plugin-interval").prop("value", plugin.rescheduleAfter);
-            }
+                updateTaskSchedule(plugin.name, this.value);
+            });
             node.appendTo(ui.pluginContainer);
         });
     }
@@ -58,6 +58,17 @@
             url: serverUrl + "/plugin/" + name + "/state",
             type: "PUT",
             data: enable ? '1' : '0',
+            contentType: 'text/plain',
+            processData: false
+        });
+    }
+    
+    function updateTaskSchedule(name, interval)
+    {
+        $.ajax({
+            url: serverUrl + "/task/" + name + "/interval",
+            type: "PUT",
+            data: interval,
             contentType: 'text/plain',
             processData: false
         });
