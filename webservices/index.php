@@ -23,6 +23,7 @@ $builder->addRoute('datapoints', '/datapoint', 'DataPoint');
 $builder->addRoute('plugins', '/plugin', 'Plugin');
 $builder->addRoute('tasks', '/task', 'ListScheduledTasks');
 $builder->addRoute('updatePluginState', '/plugin/{name}/state', 'UpdatePluginState', ['PUT', 'OPTIONS']);
+$builder->addRoute('updateScheduledTask', '/task/{name}/interval', 'UpdateScheduledTask', ['PUT', 'OPTIONS']);
 $routes = $builder->getRoutes();
 
 // Match current request
