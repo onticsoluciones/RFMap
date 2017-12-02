@@ -33,7 +33,7 @@ class ListScheduledTasksController extends Controller
     {
         return [
             'plugin' => $row['plugin'],
-            'reschedule_after' => $row['reschedule_after']
+            'reschedule_after' => (int) $row['reschedule_after']
         ];
     }
 }

@@ -22,10 +22,12 @@ $builder = new RouteCollectionBuilder();
 $builder->addRoute('datapoints', '/datapoint', 'DataPoint');
 $builder->addRoute('plugins', '/plugin', 'Plugin');
 $builder->addRoute('tasks', '/task', 'ListScheduledTasks');
+$builder->addRoute('updatePluginState', '/plugin/{name}/state', 'UpdatePluginState', 'PUT');
 $routes = $builder->getRoutes();
 
 // Match current request
-$context = new RequestContext('/');
+$context = new RequestContext();
+$context->fromRequest($request);
 $matcher = new UrlMatcher($routes, $context);
 
 try
@@ -37,6 +39,7 @@ try
     $controller = new $parameters['_controller'];
     $controller->setRequest($request);
     $controller->setConfiguration($configuration);
+    $controller->setParameters($parameters);
     
     // Execute it and fetch the response
     $response = $controller->indexAction();
