@@ -1,3 +1,4 @@
 #!/bin/bash
 
-./pmr_scan.php 2>/dev/null
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+"$DIR/pmr_scan.php" 2>/dev/null

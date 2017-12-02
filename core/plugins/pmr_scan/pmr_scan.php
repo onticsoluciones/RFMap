@@ -61,7 +61,7 @@
 	    'frequency' => $channels[1]/1000,
 	    'bandwidth' => 0.0125,
 	    'rssi' => $pmr[$i],
-	    'extra' => ''
+	    'extra' => []
 	);
     }
 
