@@ -81,18 +81,21 @@ class TaskExecutor
             return;
         }
         
-        // Convert the json output to a datapoint
-        $dataPoint = static::jsonToDataPoint($task->plugin, $data);
-        $this->completeTask($task, $dataPoint);
+        // Convert the json output to a datapoint array
+        $dataPointArray = static::jsonToDataPoints($task->plugin, $data);
+        $this->completeTask($task, $dataPointArray);
     }
     
-    private function completeTask(Task $task, DataPoint $dataPoint = null)
+    private function completeTask(Task $task, $dataPointArray = [])
     {
         $this->connection->beginTransaction();
         
-        if($dataPoint)
+        if($dataPointArray)
         {
-            $this->dataPointRepository->add($dataPoint);
+            foreach($dataPointArray as $dataPoint)
+            {
+                $this->dataPointRepository->add($dataPoint);
+            }
         }
         
         // Remove the task from the queue
@@ -111,40 +114,47 @@ class TaskExecutor
 
     /**
      * @param string $pluginName
-     * @param array $json
-     * @return null|DataPoint
+     * @param array $jsonArray
+     * @return DataPoint[]
      */
-    private static function jsonToDataPoint($pluginName, $json)
+    private static function jsonToDataPoints($pluginName, $jsonArray)
     {
-        // Verify that all required fields are present
-        $requiredFields = [
-            'entity_id',
-            'name',
-            'frequency',
-            'bandwidth',
-            'rssi',
-            'extra'
-        ];
+        $dataPoints = [];
         
-        foreach($requiredFields as $field)
+        foreach($jsonArray as $json)
         {
-            if(!array_key_exists($field, $json))
+            // Verify that all required fields are present
+            $requiredFields = [
+                'entity_id',
+                'name',
+                'frequency',
+                'bandwidth',
+                'rssi',
+                'extra'
+            ];
+
+            foreach ($requiredFields as $field)
             {
-                return null;
+                if (!array_key_exists($field, $json))
+                {
+                    continue;
+                }
             }
+
+            // Compose the datapoint object
+            $dataPoint = new DataPoint();
+            $dataPoint->plugin = $pluginName;
+            $dataPoint->entityid = $json['entity_id'];
+            $dataPoint->name = $json['name'];
+            $dataPoint->frequency = $json['frequency'];
+            $dataPoint->bandwidth = $json['bandwidth'];
+            $dataPoint->rssi = $json['rssi'];
+            $dataPoint->extra = $json['extra'];
+
+            // Add datapoint to the array
+            $dataPoints[] = $dataPoint;
         }
         
-        // Compose the datapoint object
-        $dataPoint = new DataPoint();
-        $dataPoint->plugin = $pluginName;
-        $dataPoint->entityid = $json['entity_id'];
-        $dataPoint->name = $json['name'];
-        $dataPoint->frequency = $json['frequency'];
-        $dataPoint->bandwidth = $json['bandwidth'];
-        $dataPoint->rssi = $json['rssi'];
-        $dataPoint->extra = $json['extra'];
-        
-        // And return it
-        return $dataPoint;
+        return $dataPoints;
     }
 }

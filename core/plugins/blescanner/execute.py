@@ -24,7 +24,7 @@ def main():
     # Filtramos duplicados
     map = {}
     for device in devices:
-        map[device['entityid']] = device
+        map[device['entity_id']] = device
         
     # Sacamos resultados por stdout
     print(json.dumps(map.values()))
