@@ -54,10 +54,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
             font-weight: bold;
             background-color: green;
         }
-        
         .content
         {
-            min-height: 0px;
+            min-height: 0;
+        }
+        #karma-ok,
+        #karma-nok
+        {
+            background-color: green;
+            margin: 10px;
+            padding: 40px;
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            display: none;
+        }
+        
+        #karma-nok
+        {
+            background-color: darkred;
         }
     </style>
 </head>
@@ -242,7 +257,7 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a class="plugin" data-plugin="blescanner" href="#">BLE Scanner</a></li>
-                        <li><a href="#">Karma Detector</a></li>
+                        <li><a class="plugin" data-plugin="karma_detector" href="#">Karma Detector</a></li>
                         <li><a class="plugin" data-plugin="pmr_scan" href="#">PMR Scan</a></li>
                         <li><a class="plugin" data-plugin="wifiscanner" href="#">WiFi Scanner</a></li>
                     </ul>
@@ -340,21 +355,12 @@ desired effect
 
             <div class="row">
                 <div class="col-md-12" id="content-container">
-                    <!-- AREA CHART -->
-                    <!--<div class="box box-primary">
-                      <div class="box-header with-border">
-                        <h3 class="box-title">Area Chart</h3>
-          
-                        <div class="box-tools pull-right">
-                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                          </button>
-                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>
-                      </div>
-                      <div class="box-body chart-responsive">
-                        <div class="chart" id="revenue-chart" style="height: 300px;"></div>
-                      </div>
-                    </div>-->
+                    <div id="karma-ok">
+                        No problems found
+                    </div>
+                    <div id="karma-nok">
+                        Threat detected!
+                    </div>
                 </div>
             </div>
 
@@ -505,6 +511,15 @@ desired effect
 
     function loadData(plugin)
     {
+        if(plugin === "karma_detector")
+        {
+            displayKarmaState(plugin);
+            return;
+        }
+        
+        $("#karma-nok").hide();
+        $("#karma-ok").hide();
+        
         $.getJSON('http://localhost:9200/datapoint?plugin=' + plugin)
             .done(function (data) {
                 var col = [];
@@ -559,9 +574,28 @@ desired effect
                     }
                 }
 
-                $("#content-container").empty();
+                $("#content-container table").remove();
                 $(table).appendTo($("#content-container"));
             });
+    }
+    
+    function displayKarmaState(plugin)
+    {
+        $("#content-container table").remove();
+        $.getJSON('http://localhost:9200/datapoint?plugin=' + plugin)
+            .done(function (data) {
+                
+                if(data.length > 0 && data[0]['extra']['Karma'] === 1)
+                {
+                    $("#karma-nok").show();
+                    $("#karma-ok").hide();
+                }
+                else
+                {
+                    $("#karma-ok").show();
+                    $("#karma-nok").hide();
+                }
+            })
     }
 
     $(function () {
