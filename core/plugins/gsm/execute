@@ -1,0 +1,4 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+"$DIR/gsm_scan.php" 2>/dev/null
