@@ -18,9 +18,17 @@ class DataPointController extends Controller
             ->open($this->configuration->databasePath);
         
         // Fetch all datapoints
-        $sql = 'SELECT * FROM datapoints;';
+        $sql = 'SELECT * FROM datapoints';
+        $parameters = [];
+        
+        if($plugin = $this->request->get('plugin'))
+        {
+            $sql .= ' WHERE plugin = :plugin';
+            $parameters['plugin'] = $plugin;
+        }
+        
         $statement = $connection->prepare($sql);
-        $statement->execute();
+        $statement->execute($parameters);
         
         // Convert them to the appropiate format
         $datapoints = array_map(function($row)

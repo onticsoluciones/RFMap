@@ -33,7 +33,7 @@ $matcher = new UrlMatcher($routes, $context);
 
 try
 {
-    $parameters = $matcher->match($request->getRequestUri());
+    $parameters = $matcher->match($request->getPathInfo());
     
     // Instantiate matching controller
     /** @var Controller $controller */
