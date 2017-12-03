@@ -24,6 +24,7 @@ $builder->addRoute('plugins', '/plugin', 'Plugin');
 $builder->addRoute('tasks', '/task', 'ListScheduledTasks');
 $builder->addRoute('updatePluginState', '/plugin/{name}/state', 'UpdatePluginState', ['PUT', 'OPTIONS']);
 $builder->addRoute('updateScheduledTask', '/task/{name}/interval', 'UpdateScheduledTask', ['PUT', 'OPTIONS']);
+$builder->addRoute('enablePlugin', '/plugin/{name}/enable', 'EnablePlugin');
 $routes = $builder->getRoutes();
 
 // Match current request

@@ -12,7 +12,7 @@ class TaskRepository extends Repository
     public function findFirst()
     {
         $sql = '
-          SELECT * 
+          SELECT tasks.* 
           FROM tasks 
           INNER JOIN plugins ON tasks.plugin = plugins.name
           WHERE strftime(\'%s\', \'now\') >= run_at AND plugins.enabled = 1
@@ -21,7 +21,7 @@ class TaskRepository extends Repository
         $command = $this->connection->prepare($sql);
         $command->execute();
         
-        if($row = $command->fetch())
+        if($row = $command->fetch(\PDO::FETCH_ASSOC))
         {
             return static::rowToTask($row);
         }

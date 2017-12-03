@@ -27,4 +27,13 @@ class DataPointRepository extends Repository
             'extra' => json_encode($dataPoint->extra)
         ]);
     }
+    
+    public function deletePluginData($pluginName)
+    {
+        $sql = 'DELETE FROM datapoints WHERE plugin = :plugin;';
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            'plugin' => $pluginName
+        ]);
+    }
 }

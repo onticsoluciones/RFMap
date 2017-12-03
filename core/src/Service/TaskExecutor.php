@@ -102,6 +102,7 @@ class TaskExecutor
         
         if($dataPointArray)
         {
+            $this->dataPointRepository->deletePluginData($task->plugin);
             foreach($dataPointArray as $dataPoint)
             {
                 $this->dataPointRepository->add($dataPoint);
