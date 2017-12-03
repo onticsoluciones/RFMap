@@ -1,15 +1,15 @@
 # RFMap - Radio Frequency Mapper
-
 ----------
-
+![](https://github.com/onticsoluciones/RFMap/blob/master/ui/dist/img/logo.png)
 
 # Table of Contents
 * [Description](https://github.com/onticsoluciones/RFMap#description)
 * [Technology](https://github.com/onticsoluciones/RFMap#technology-used)
 * [Features](https://github.com/onticsoluciones/RFMap#features)
-* [Installation](https://github.com/onticsoluciones/RFMap#installation)
-* [Plugins](https://github.com/onticsoluciones/RFMap#plugins)
-* [Usage](https://github.com/onticsoluciones/RFMap#usage)
+* [Installation](https://github.com/onticsoluciones/RFMap#manual-installation)
+* [Docker Image](https://github.com/onticsoluciones/RFMap#docker-image)
+* [Plugins](https://github.com/onticsoluciones/RFMap#available-plugins)
+* [Prerequisites](https://github.com/onticsoluciones/RFMap#prerequisites)
 * [License](https://github.com/onticsoluciones/RFMap/blob/master/LICENSE)
 
 # Description
@@ -20,6 +20,7 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
 # Technology used
 
 - [x] PHP
+- [x] JQuery
 - [x] GnuRadio
 - [x] RTL-SDR
 - [x] Python
@@ -30,7 +31,7 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
 # Features
 
  - Detection of malicious devices (e.g. WiFi Pineapple, hidden webcams, spy microphones). 
- - Vulnerability detection.
+ - Vulnerability /Attack detection.
  - Avoid data filtration.
  - Detection of networks and devices.
  - Inventory and monitoring.
@@ -38,7 +39,7 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
  - New devices notification/ Alerts.      
  - Optimization of spectrum use.     
 
-# Installation
+# Manual Installation
 
 After cloning the repository, download Composer:
 
@@ -72,8 +73,19 @@ Run the schema migration tool to create the database:
 ```bash
 vendor/bin/phinx migrate
 ```
+# Docker Image
+Build the image with:
+```bash
+docker build -t rfmap:latest 
+```
 
-# Plugins
+Run it with:
+```bash
+docker run -p 8080:8080 -p 9200:9200 rfmap
+```
+And the web interface should be accesible from http://localhost:8080
+
+# Availabe Plugins
 
 ## pmr_scan
 
@@ -87,6 +99,9 @@ Wifi 2.4/5Ghz analyzer: scans and returns  ssid, bssid, rssi, frequency and othe
 
 ## ble_scanner
 Bluetooth analyzer: scans BLE devices in enviroment and provide information like bssid, name and rssi.
+
+## gsm_scan
+Scan GMS devices like BTS
 
 ### Prerequisites
 
@@ -104,9 +119,6 @@ This step is needed only the first time.
     cmake ..
     make
     make install
-
-# Usage
-
 
 # Contributors
 
