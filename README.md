@@ -1,6 +1,5 @@
 # RFMap - Radio Frequency Mapper
 ----------
-![](https://github.com/onticsoluciones/RFMap/blob/master/ui/dist/img/logo.png)
 
 # Table of Contents
 * [Description](https://github.com/onticsoluciones/RFMap#description)
@@ -85,7 +84,7 @@ docker run -p 8080:8080 -p 9200:9200 rfmap
 ```
 And the web interface should be accesible from http://localhost:8080
 
-# Availabe Plugins
+# Available Plugins
 
 ## pmr_scan
 
