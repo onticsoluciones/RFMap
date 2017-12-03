@@ -1,4 +1,3 @@
-
 # RFMap - Radio Frequency Mapper
 
 ----------
@@ -26,6 +25,7 @@ It uses a combination of software and low-cost hardware (SDR) which allows to ma
 - [x] Python
 - [x] SQLite
 - [x] Phinx
+- [x] BootStrap
 
 # Features
 
@@ -78,6 +78,15 @@ vendor/bin/phinx migrate
 ## pmr_scan
 
 PMR 446 MHz power channel analyzer: scans the 8 PMR channels and returns its power (DBi).
+
+## karma_detector
+Detect if anything is making Karma Attack.
+
+## wifi_scanner
+Wifi 2.4/5Ghz analyzer: scans and returns  ssid, bssid, rssi, frequency and other relevant information.
+
+## ble_scanner
+Bluetooth analyzer: scans BLE devices in enviroment and provide information like bssid, name and rssi.
 
 ### Prerequisites
 
