@@ -1,1 +1,12 @@
-karma.sh
+#!/bin/bash
+# Plugin Karma Detector
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+timeout 10 "$DIR/karma.sh" -s 9
+
+if [ $? -eq 124 ]; then
+    echo [{"entity_id":"0","name":"0","frequency":0,"bandwidth":20.00,"rssi":0,"extra":{"Karma":"0"}]
+fi
+
+killall -9 mdk3
